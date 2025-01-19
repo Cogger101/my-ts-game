@@ -35,3 +35,4 @@
 -   [ ] Adding more animation to the hangman ie falls off rope when you lose
 -   [ ] Timer
 -   [ ] Difficulty levels
+-   [ ] Split words into catagories
