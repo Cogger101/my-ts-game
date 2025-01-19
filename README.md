@@ -6,11 +6,11 @@
 
 -   [x] Need 26 buttons to represent the keyboard (each letter of the alphabet)
 -   [x] Space the letter buttons out (potentially replicate what a standard keyboard looks like or in alphabetical order)
--   [ ] Placeholder lines for new word
+-   [x] Placeholder lines for new word
 -   [ ] Create a display so the letters appear when you guess them correctly
 -   [ ] Display for incorrect guesses
--   [ ] New game/ Restart button
--   [ ] 'Solution' button
+-   [x] New game/ Restart button
+-   [x] 'Solution' button
 -
 
 ## Typescrpit
