@@ -24,27 +24,28 @@ header {
     position: absolute;
     top: 0%;
 }
-.gameContainer {
+.game-container {
     display: flex;
     flex-direction: column;
     border: 2px solid black;
     border-radius: 10px;
 }
-.startBtn {
+.start-btn {
     margin: 10px;
     padding: 30px;
-    &--startGame {
+    &__start-game {
+        font-weight: bold;
         background-color: green;
         padding: 10px;
     }
 }
-.wordDisplay {
+.word-display {
     display: flex;
     gap: 10px;
     list-style: none;
     align-items: center;
     justify-content: center;
-    &--letter {
+    &__letter {
         width: 28px;
         margin-bottom: 40px;
         border-bottom: 3px solid white;
@@ -56,7 +57,7 @@ header {
     font-weight: bold;
     font-family: Arial;
     gap: 5px;
-    &--letter {
+    &__letter {
         width: calc(100% / 9 - 5px);
         margin: 10px;
         font-weight: bold;
@@ -64,19 +65,21 @@ header {
         padding: 5px;
     }
 }
-.inGameBtn {
+.in-game-btn {
     display: flex;
     margin: 10px;
     padding-top: 20px;
     align-items: center;
     justify-content: center;
 
-    &--newGame {
+    &__new-game {
         background-color: purple;
         padding: 10px;
         margin-right: 30px;
+        font-weight: bold;
     }
-    &--solution {
+    &__solution {
+        font-weight: bold;
         background-color: purple;
         padding: 10px;
     }
