@@ -33,7 +33,7 @@ const targetWord = animals[Math.floor(Math.random() * animals.length)]
 console.log(targetWord);
 const guessedLetters: string[] = [];
 
-// Create work placeholders
+// Create word display placeholders
 
 wordDisplayContainer.innerHTML = "";
 targetWord.forEach(() => {
@@ -64,3 +64,14 @@ const handleLetterClicks = (key: string) => {
         }
     }
 };
+
+// Reset the game
+
+const newGameBtn = document.querySelector<HTMLButtonElement>(
+    ".in-game-btn__new-game"
+);
+newGameBtn?.addEventListener("click", () => {
+    guessedLetters.length = 0;
+    wordDisplay.forEach((li) => (li.textContent = "_"));
+    console.log("New game started");
+});
