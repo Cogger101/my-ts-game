@@ -1,30 +1,19 @@
-import "./style.scss";
+import "./styles/style.scss";
+import { alphabet, animals, cities, countries } from "./data";
 
-const alphabet = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-];
+const keyboard = document.querySelector<HTMLDivElement>(".keyboard");
+
+if (!keyboard) {
+    throw new Error("Can't find keyboard div element");
+}
+
+alphabet.forEach((letter) => {
+    const keyboardLetterBtn = document.createElement("button");
+    keyboardLetterBtn.textContent = letter;
+    keyboardLetterBtn.classList.add("keyboard__letter");
+
+    keyboardLetterBtn.addEventListener("click", () => {
+        console.log(`${letter} button was clicked on the keyboard`);
+    });
+    keyboard.appendChild(keyboardLetterBtn);
+});

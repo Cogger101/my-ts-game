@@ -1,3 +1,5 @@
+@use "./keyboard.scss";
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -52,19 +54,19 @@ header {
     }
 }
 
-.keyboard {
-    background-color: white;
-    font-weight: bold;
-    font-family: Arial;
-    gap: 5px;
-    &__letter {
-        width: calc(100% / 9 - 5px);
-        margin: 10px;
-        font-weight: bold;
-        font-family: Arial;
-        padding: 5px;
-    }
-}
+// .keyboard {
+//     background-color: white;
+//     font-weight: bold;
+//     font-family: Arial;
+//     gap: 5px;
+//     &__letter {
+//         width: calc(100% / 9 - 5px);
+//         margin: 10px;
+//         font-weight: bold;
+//         font-family: Arial;
+//         padding: 5px;
+//     }
+// }
 .in-game-btn {
     display: flex;
     margin: 10px;
