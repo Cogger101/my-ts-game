@@ -7,7 +7,7 @@
 -   [x] Need 26 buttons to represent the keyboard (each letter of the alphabet)
 -   [x] Space the letter buttons out (potentially replicate what a standard keyboard looks like or in alphabetical order)
 -   [x] Placeholder lines for new word
--   [ ] Create a display so the letters appear when you guess them correctly
+-   [x] Create a display so the letters appear when you guess them correctly
 -   [ ] Display for incorrect guesses
 -   [x] New game/ Restart button
 -   [x] 'Solution' button
@@ -15,10 +15,10 @@
 
 ## Typescrpit
 
--   [ ] Refreshing the word when New game/Refresh btn is pressed
+-   [x] Refreshing the word when New game/Refresh btn is pressed
 -   [ ] Letters to be greyed out and no longer reusable once clicked
--   [ ] Reset the letter press when New game/refresh btn is pressed
--   [ ] Revealing matching letters
+-   [x] Reset the letter press when New game/refresh btn is pressed
+-   [x] Revealing matching letters
 -   [ ] Hangman animation
     -   [ ] Head pops up for first wrong letter
     -   [ ] Body pops up for second wrong letter

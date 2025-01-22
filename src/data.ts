@@ -27,6 +27,6 @@ export const alphabet = [
     "z",
 ];
 
-export const animals: string[] = ["DOG", "CAT", "SNAKE"];
+export const animals: string[] = ["DOG", "CAT", "SNAKE", "RABBIT"];
 export const cities: string[] = ["LONDON", "PARIS", "MADRID"];
 export const countries: string[] = ["ENGLAND", "FRANCE", "SPAIN"];

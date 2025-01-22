@@ -75,3 +75,12 @@ newGameBtn?.addEventListener("click", () => {
     wordDisplay.forEach((li) => (li.textContent = "_"));
     console.log("New game started");
 });
+
+// Add event listener for physical keyboard inputs
+
+document.addEventListener("keydown", (event) => {
+    const key = event.key.toUpperCase();
+    if (/^[A-Z]$/.test(key)) {
+        handleLetterClicks(key);
+    }
+});
