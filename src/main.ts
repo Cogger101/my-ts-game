@@ -1,13 +1,15 @@
 import "./styles/style.scss";
-import { alphabet, animals, cities, countries } from "./data";
+import { alphabet, options, Options } from "./data";
 
 const keyboard = document.querySelector<HTMLDivElement>(".keyboard");
 const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
+const optionsContainer =
+    document.querySelector<HTMLDivElement>(".options-container");
 
-if (!keyboard || !wordDisplayContainer) {
+if (!keyboard || !wordDisplayContainer || !optionsContainer) {
     throw new Error(
-        "Can't find div for keyboard or UL for word display container"
+        "Can't find div for keyboard/options container or UL for word display container"
     );
 }
 
@@ -25,23 +27,68 @@ alphabet.forEach((letter) => {
     keyboard.appendChild(keyboardLetterBtn);
 });
 
+// creating catagory selection
+let selectedCatagory = "";
+
+const catagoriesArr = ["animals", "cities", "countries"];
+console.log(options["cities"], "cities");
+
+catagoriesArr.forEach((catagory) => {
+    let catagoriesBtn = document.createElement("button");
+    catagoriesBtn.textContent = catagory;
+    catagoriesBtn.classList.add("options-container__catagory-btn");
+
+    catagoriesBtn.addEventListener("click", () => {
+        console.log(`${catagory} was clicked`);
+        selectedCatagory = catagoriesBtn.innerHTML ?? "";
+        console.log(selectedCatagory, "inside for each");
+        if (selectedCatagory !== "") {
+            const randomIndex = Math.floor(
+                Math.random() * options[`${selectedCatagory}`].length
+            );
+            console.log("inside if", selectedCatagory);
+            console.log(options[selectedCatagory], "options");
+            console.log(randomIndex, "math.floor");
+            const targetWord = options[selectedCatagory][randomIndex];
+            console.log(targetWord, "targetWord");
+            const wordArr = targetWord.toUpperCase().split("");
+
+            console.log(wordArr);
+            wordArr.forEach(() => {
+                const li = document.createElement("li");
+                li.className = "word-display__letter";
+                li.textContent = "_";
+                wordDisplayContainer.appendChild(li);
+            });
+        }
+    });
+    optionsContainer.appendChild(catagoriesBtn);
+});
+
+// console.log(selectedCatagory, "<====== selected cat");
+// let catagory = options[catagoryArr[1]];
+// console.log(catagory);
+
+// let selectedCatagory = options[catagory];
+
+// const selectedCatagory = () => {
+//     optionsContainer.innerHTML = `<h3> Select an option:</h3>`;
+//     let catagoriesBtn = document.createElement("button");
+//     for (let value in options) {
+//         catagoriesBtn.innerHTML;
+//     }
+// };
+
 // Selecting a random word from data (animals array to start with)
 
-const targetWord = animals[Math.floor(Math.random() * animals.length)]
-    .toUpperCase()
-    .split("");
-console.log(targetWord);
+// console.log(Object.values(options), "=== options obj");
+// console.log(options, "<====== options");
+
 const guessedLetters: string[] = [];
 
 // Create word display placeholders
 
 wordDisplayContainer.innerHTML = "";
-targetWord.forEach(() => {
-    const li = document.createElement("li");
-    li.className = "word-display__letter";
-    li.textContent = "_";
-    wordDisplayContainer.appendChild(li);
-});
 
 const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
     ".word-display__letter"
@@ -70,7 +117,10 @@ const handleLetterClicks = (key: string) => {
 const newGameBtn = document.querySelector<HTMLButtonElement>(
     ".in-game-btn__new-game"
 );
-newGameBtn?.addEventListener("click", () => {
+if (!newGameBtn) {
+    throw new Error("can't find new game btn element");
+}
+newGameBtn.addEventListener("click", () => {
     guessedLetters.length = 0;
     wordDisplay.forEach((li) => (li.textContent = "_"));
     console.log("New game started");

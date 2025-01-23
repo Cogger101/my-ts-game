@@ -1,0 +1,16 @@
+.options-container {
+    display: flex;
+    margin: 15px;
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    &__catagory-btn {
+        background-color: purple;
+        padding: 10px;
+        margin: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        font-weight: bold;
+        border-radius: 10%;
+    }
+}
