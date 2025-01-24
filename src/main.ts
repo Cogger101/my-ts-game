@@ -1,7 +1,7 @@
 import "./styles/style.scss";
 import { alphabet, options, Options } from "./data";
 
-const keyboard = document.querySelector<HTMLDivElement>(".keyboard");
+const keyboardContainer = document.querySelector<HTMLDivElement>(".keyboard");
 const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
 const optionsContainer =
@@ -12,7 +12,7 @@ const wrongGuessMsg =
     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
 
 if (
-    !keyboard ||
+    !keyboardContainer ||
     !wordDisplayContainer ||
     !optionsContainer ||
     !wrongGuessMsg ||
@@ -23,55 +23,59 @@ if (
     );
 }
 
-// Generate keyboard buttons
+// Generate keyboard buttons function
+const keyboard = () => {
+    alphabet.forEach((letter) => {
+        const keyboardLetterBtn = document.createElement("button");
+        keyboardLetterBtn.textContent = letter;
+        keyboardLetterBtn.classList.add("keyboard__letter");
 
-alphabet.forEach((letter) => {
-    const keyboardLetterBtn = document.createElement("button");
-    keyboardLetterBtn.textContent = letter;
-    keyboardLetterBtn.classList.add("keyboard__letter");
-
-    keyboardLetterBtn.addEventListener("click", () => {
-        console.log(`${letter} button was clicked on the keyboard`);
-        handleLetterClicks(letter);
+        keyboardLetterBtn.addEventListener("click", () => {
+            console.log(`${letter} button was clicked on the keyboard`);
+            handleLetterClicks(letter);
+        });
+        keyboardContainer.appendChild(keyboardLetterBtn);
     });
-    keyboard.appendChild(keyboardLetterBtn);
-});
+};
+keyboard();
 
 // creating catagory selection
 let targetWord = "";
 let selectedCatagory = "";
 const catagoriesArr = ["animals", "cities", "countries"];
+const categorySelection = () => {
+    catagoriesArr.forEach((catagory) => {
+        let catagoriesBtn = document.createElement("button");
+        catagoriesBtn.textContent = catagory;
+        catagoriesBtn.classList.add("options-container__catagory-btn");
 
-catagoriesArr.forEach((catagory) => {
-    let catagoriesBtn = document.createElement("button");
-    catagoriesBtn.textContent = catagory;
-    catagoriesBtn.classList.add("options-container__catagory-btn");
-
-    catagoriesBtn.addEventListener("click", () => {
-        console.log(`${catagory} was clicked`);
-        selectedCatagory = catagoriesBtn.innerHTML ?? "";
-        // console.log(selectedCatagory, "inside for each");
-        if (selectedCatagory !== "") {
-            const randomIndex = Math.floor(
-                Math.random() * options[`${selectedCatagory}`].length
-            );
-            targetWord = options[selectedCatagory][randomIndex].toUpperCase();
-            console.log(targetWord, "targetWord");
-            const wordArr = targetWord.split("");
-            // Create word display placeholders
-            wordDisplayContainer.innerHTML = "";
-            console.log(wordArr);
-            wordArr.forEach(() => {
-                const li = document.createElement("li");
-                li.className = "word-display__letter";
-                li.textContent = "_";
-                wordDisplayContainer.appendChild(li);
-            });
-        }
+        catagoriesBtn.addEventListener("click", () => {
+            console.log(`${catagory} was clicked`);
+            selectedCatagory = catagoriesBtn.innerHTML ?? "";
+            // console.log(selectedCatagory, "inside for each");
+            if (selectedCatagory !== "") {
+                const randomIndex = Math.floor(
+                    Math.random() * options[`${selectedCatagory}`].length
+                );
+                targetWord =
+                    options[selectedCatagory][randomIndex].toUpperCase();
+                console.log(targetWord, "targetWord");
+                const wordArr = targetWord.split("");
+                // Create word display placeholders
+                wordDisplayContainer.innerHTML = "";
+                console.log(wordArr);
+                wordArr.forEach(() => {
+                    const li = document.createElement("li");
+                    li.className = "word-display__letter";
+                    li.textContent = "_";
+                    wordDisplayContainer.appendChild(li);
+                });
+            }
+        });
+        optionsContainer.appendChild(catagoriesBtn);
     });
-    optionsContainer.appendChild(catagoriesBtn);
-});
-
+};
+categorySelection();
 // Selecting a random word from data (animals array to start with)
 
 const guessedLetters: string[] = [];
