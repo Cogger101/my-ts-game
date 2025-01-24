@@ -34,7 +34,23 @@ export type Options = {
 };
 
 export const options: Options = {
-    animals: ["DOG", "CAT", "SNAKE", "RABBIT"],
-    cities: ["LONDON", "PARIS", "MADRID"],
-    countries: ["ENGLAND", "FRANCE", "SPAIN"],
+    animals: ["DOG", "CAT", "SNAKE", "RABBIT", "ELEPHANT", "HORSE", "LION"],
+    cities: [
+        "LONDON",
+        "PARIS",
+        "MADRID",
+        "MUNICH",
+        "DUBLIN",
+        "LISBON",
+        "WELLINGTON",
+    ],
+    countries: [
+        "ENGLAND",
+        "FRANCE",
+        "SPAIN",
+        "IRELAND",
+        "PORTUGAL",
+        "INDIA",
+        "RUSSIA",
+    ],
 };
