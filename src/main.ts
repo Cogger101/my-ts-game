@@ -6,8 +6,18 @@ const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
 const optionsContainer =
     document.querySelector<HTMLDivElement>(".options-container");
+const wrongGuessCounter =
+    document.querySelector<HTMLDivElement>(".wrong-guess-msg");
+const wrongGuessMsg =
+    document.querySelector<HTMLDivElement>(".wrong-guess-msg");
 
-if (!keyboard || !wordDisplayContainer || !optionsContainer) {
+if (
+    !keyboard ||
+    !wordDisplayContainer ||
+    !optionsContainer ||
+    !wrongGuessMsg ||
+    !wrongGuessCounter
+) {
     throw new Error(
         "Can't find div for keyboard/options container or UL for word display container"
     );
@@ -31,7 +41,6 @@ alphabet.forEach((letter) => {
 let targetWord = "";
 let selectedCatagory = "";
 const catagoriesArr = ["animals", "cities", "countries"];
-console.log(options["cities"], "cities");
 
 catagoriesArr.forEach((catagory) => {
     let catagoriesBtn = document.createElement("button");
@@ -46,9 +55,9 @@ catagoriesArr.forEach((catagory) => {
             const randomIndex = Math.floor(
                 Math.random() * options[`${selectedCatagory}`].length
             );
-            const targetWord = options[selectedCatagory][randomIndex];
+            targetWord = options[selectedCatagory][randomIndex].toUpperCase();
             console.log(targetWord, "targetWord");
-            const wordArr = targetWord.toUpperCase().split("");
+            const wordArr = targetWord.split("");
             // Create word display placeholders
             wordDisplayContainer.innerHTML = "";
             console.log(wordArr);
@@ -67,16 +76,15 @@ catagoriesArr.forEach((catagory) => {
 
 const guessedLetters: string[] = [];
 
-const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
-    ".word-display__letter"
-);
-
 // Matching the keyboard and word display inputs
 
 const handleLetterClicks = (key: string) => {
     key = key.toUpperCase();
     if (/^[A-Z]$/.test(key) && !guessedLetters.includes(key)) {
         guessedLetters.push(key);
+        let wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
+            ".word-display__letter"
+        );
         if (targetWord.includes(key)) {
             targetWord.split("").forEach((letter, index) => {
                 if (letter === key) {
@@ -99,6 +107,9 @@ if (!newGameBtn) {
 }
 newGameBtn.addEventListener("click", () => {
     guessedLetters.length = 0;
+    const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
+        ".word-display__letter"
+    );
     wordDisplay.forEach((li) => (li.textContent = "_"));
     console.log("New game started");
 });
