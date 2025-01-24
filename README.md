@@ -37,3 +37,7 @@
 -   [ ] Timer
 -   [ ] Difficulty levels
 -   [ ] Split words into catagories
+
+## Project Overview
+
+This is a hangman game built using **Typescript**, **HTML** and **SCSS** hosted on **GitHub Pages**. I really enjoyed this project as it helped me gain a better understanding of **Typescrpt** syntax and usage.

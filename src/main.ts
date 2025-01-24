@@ -28,8 +28,8 @@ alphabet.forEach((letter) => {
 });
 
 // creating catagory selection
+let targetWord = "";
 let selectedCatagory = "";
-
 const catagoriesArr = ["animals", "cities", "countries"];
 console.log(options["cities"], "cities");
 
@@ -41,18 +41,16 @@ catagoriesArr.forEach((catagory) => {
     catagoriesBtn.addEventListener("click", () => {
         console.log(`${catagory} was clicked`);
         selectedCatagory = catagoriesBtn.innerHTML ?? "";
-        console.log(selectedCatagory, "inside for each");
+        // console.log(selectedCatagory, "inside for each");
         if (selectedCatagory !== "") {
             const randomIndex = Math.floor(
                 Math.random() * options[`${selectedCatagory}`].length
             );
-            console.log("inside if", selectedCatagory);
-            console.log(options[selectedCatagory], "options");
-            console.log(randomIndex, "math.floor");
             const targetWord = options[selectedCatagory][randomIndex];
             console.log(targetWord, "targetWord");
             const wordArr = targetWord.toUpperCase().split("");
-
+            // Create word display placeholders
+            wordDisplayContainer.innerHTML = "";
             console.log(wordArr);
             wordArr.forEach(() => {
                 const li = document.createElement("li");
@@ -65,43 +63,22 @@ catagoriesArr.forEach((catagory) => {
     optionsContainer.appendChild(catagoriesBtn);
 });
 
-// console.log(selectedCatagory, "<====== selected cat");
-// let catagory = options[catagoryArr[1]];
-// console.log(catagory);
-
-// let selectedCatagory = options[catagory];
-
-// const selectedCatagory = () => {
-//     optionsContainer.innerHTML = `<h3> Select an option:</h3>`;
-//     let catagoriesBtn = document.createElement("button");
-//     for (let value in options) {
-//         catagoriesBtn.innerHTML;
-//     }
-// };
-
 // Selecting a random word from data (animals array to start with)
 
-// console.log(Object.values(options), "=== options obj");
-// console.log(options, "<====== options");
-
 const guessedLetters: string[] = [];
-
-// Create word display placeholders
-
-wordDisplayContainer.innerHTML = "";
 
 const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
     ".word-display__letter"
 );
 
-// Match/handle the keyboard and word display inputs
+// Matching the keyboard and word display inputs
 
 const handleLetterClicks = (key: string) => {
     key = key.toUpperCase();
     if (/^[A-Z]$/.test(key) && !guessedLetters.includes(key)) {
         guessedLetters.push(key);
         if (targetWord.includes(key)) {
-            targetWord.forEach((letter, index) => {
+            targetWord.split("").forEach((letter, index) => {
                 if (letter === key) {
                     wordDisplay[index].textContent = key;
                 }
@@ -118,7 +95,7 @@ const newGameBtn = document.querySelector<HTMLButtonElement>(
     ".in-game-btn__new-game"
 );
 if (!newGameBtn) {
-    throw new Error("can't find new game btn element");
+    throw new Error("Can't find new game btn element");
 }
 newGameBtn.addEventListener("click", () => {
     guessedLetters.length = 0;
