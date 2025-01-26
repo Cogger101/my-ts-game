@@ -7,8 +7,6 @@ const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
 const optionsContainer =
     document.querySelector<HTMLDivElement>(".options-container");
-// const wrongGuessCounter =
-//     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
 // const wrongGuessMsg =
 //     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
 
@@ -101,10 +99,12 @@ const handleLetterClicks = (key: string) => {
                 }
             });
         } else {
+            // handling incorrect guesses
             incorrectLetters.push(key);
             console.log(`${key} is not in the word.`);
             const incorrectCount = incorrectLetterCount();
             hangmanDrawing(incorrectCount);
+            console.log(incorrectLetters, "<=== incorect letters");
 
             if (incorrectLetters.length > maxWrongGuesses) {
                 console.log("Game Over");
@@ -112,8 +112,6 @@ const handleLetterClicks = (key: string) => {
         }
     }
 };
-
-console.log(incorrectLetters, "<=== incorect letters");
 
 // Reset the game
 
