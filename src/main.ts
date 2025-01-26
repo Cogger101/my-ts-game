@@ -1,4 +1,5 @@
 import "./styles/style.scss";
+import { hangmanDrawing } from "./hangmanDrawing";
 import { alphabet, options, Options } from "./data";
 
 const keyboardContainer = document.querySelector<HTMLDivElement>(".keyboard");
@@ -6,18 +7,12 @@ const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
 const optionsContainer =
     document.querySelector<HTMLDivElement>(".options-container");
-const wrongGuessCounter =
-    document.querySelector<HTMLDivElement>(".wrong-guess-msg");
-const wrongGuessMsg =
-    document.querySelector<HTMLDivElement>(".wrong-guess-msg");
+// const wrongGuessCounter =
+//     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
+// const wrongGuessMsg =
+//     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
 
-if (
-    !keyboardContainer ||
-    !wordDisplayContainer ||
-    !optionsContainer ||
-    !wrongGuessMsg ||
-    !wrongGuessCounter
-) {
+if (!keyboardContainer || !wordDisplayContainer || !optionsContainer) {
     throw new Error(
         "Can't find div for keyboard/options container or UL for word display container"
     );
@@ -39,7 +34,7 @@ const keyboard = () => {
 };
 keyboard();
 
-// creating catagory selection
+// creating catagory selection and selecting a random word from data object
 let targetWord = "";
 let selectedCatagory = "";
 const catagoriesArr = ["animals", "cities", "countries"];
@@ -76,9 +71,18 @@ const categorySelection = () => {
     });
 };
 categorySelection();
-// Selecting a random word from data (animals array to start with)
+
+// Max incorrect guesses
+const maxWrongGuesses = 6;
 
 const guessedLetters: string[] = [];
+//Counter for incorect letters guessed
+
+const incorrectLetters: string[] = [];
+
+const incorrectLetterCount = (): number => {
+    return incorrectLetters.length;
+};
 
 // Matching the keyboard and word display inputs
 
@@ -86,6 +90,7 @@ const handleLetterClicks = (key: string) => {
     key = key.toUpperCase();
     if (/^[A-Z]$/.test(key) && !guessedLetters.includes(key)) {
         guessedLetters.push(key);
+
         let wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
             ".word-display__letter"
         );
@@ -96,10 +101,19 @@ const handleLetterClicks = (key: string) => {
                 }
             });
         } else {
+            incorrectLetters.push(key);
             console.log(`${key} is not in the word.`);
+            const incorrectCount = incorrectLetterCount();
+            hangmanDrawing(incorrectCount);
+
+            if (incorrectLetters.length > maxWrongGuesses) {
+                console.log("Game Over");
+            }
         }
     }
 };
+
+console.log(incorrectLetters, "<=== incorect letters");
 
 // Reset the game
 

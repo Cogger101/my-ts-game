@@ -1,5 +1,5 @@
 const hangmanDrawingContainer =
-    document.querySelector<HTMLDivElement>("hangman-drawing");
+    document.querySelector<HTMLDivElement>(".hangman-drawing");
 
 if (!hangmanDrawingContainer) {
     throw new Error("Can't find hangman drawing container");
