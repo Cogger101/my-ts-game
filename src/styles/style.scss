@@ -1,5 +1,6 @@
 @use "./keyboard.scss";
 @use "./catagories.scss";
+@use "./hangman-drawing.scss";
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -28,9 +29,13 @@ header {
     top: 0%;
 }
 .game-container {
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     border: 2px solid black;
+    gap: 2rem;
+    margin: o auto;
+    align-items: center;
     border-radius: 10px;
 }
 .start-btn {
@@ -44,14 +49,13 @@ header {
 }
 .word-display {
     display: flex;
-    gap: 10px;
-    list-style: none;
-    align-items: center;
-    justify-content: center;
+    gap: 0.25em;
+    font-size: 6rem;
+
     &__letter {
-        width: 28px;
-        margin-bottom: 40px;
-        border-bottom: 3px solid white;
+        display: flex;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
     }
 }
 

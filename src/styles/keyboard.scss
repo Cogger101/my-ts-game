@@ -14,7 +14,14 @@
         border-radius: 5px;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
-    &__letter:hover {
+    &__letter--active {
+        background-color: #4caf50;
+    }
+    &__letter--inactive {
+        opacity: 0.3;
+    }
+    &__letter:hover:not(:disabled),
+    &__letter:focus:not(:disabled) {
         background-color: #4caf50;
         color: white;
         transform: scale(1.1);

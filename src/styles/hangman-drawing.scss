@@ -1,0 +1,99 @@
+.hangman-drawing {
+    position: relative;
+    &__head {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 10px solid white;
+        position: absolute;
+        top: 50px;
+        right: -30px;
+        display: none;
+    }
+    &__body {
+        width: 10px;
+        height: 100px;
+        background: white;
+        position: absolute;
+        top: 120px;
+        right: 0px;
+        display: none;
+    }
+    &__right-arm {
+        width: 100px;
+        height: 10px;
+        background: white;
+        position: absolute;
+        top: 150px;
+        right: -100px;
+        rotate: -30deg;
+        transform-origin: left bottom;
+        display: none;
+    }
+    &__left-arm {
+        width: 100px;
+        height: 10px;
+        background: white;
+        position: absolute;
+        top: 150px;
+        right: 10px;
+        rotate: 30deg;
+        transform-origin: right bottom;
+        display: none;
+    }
+    &__right-leg {
+        width: 100px;
+        height: 10px;
+        background: white;
+        position: absolute;
+        top: 210px;
+        right: -90px;
+        rotate: 60deg;
+        transform-origin: left bottom;
+        display: none;
+    }
+    &__left-leg {
+        width: 100px;
+        height: 10px;
+        background: white;
+        position: absolute;
+        top: 210px;
+        right: 0;
+        rotate: -60deg;
+        transform-origin: right bottom;
+        display: none;
+    }
+    &__dropdown-noose {
+        height: 50px;
+        width: 10px;
+        background: white;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    &__top-bar {
+        height: 10px;
+        width: 200px;
+        background: white;
+        margin-left: 120px;
+    }
+    &__standing-pole {
+        height: 400px;
+        width: 10px;
+        background: white;
+        margin-left: 120px;
+    }
+    &__base-bar {
+        height: 10px;
+        width: 250px;
+        background: white;
+    }
+}
+.hangman-drawing__head.visible,
+.hangman-drawing__body.visible,
+.hangman-drawing__left-arm.visible,
+.hangman-drawing__right-arm.visible,
+.hangman-drawing__left-leg.visible,
+.hangman-drawing__right-leg.visible {
+    display: block;
+}
