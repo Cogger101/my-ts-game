@@ -16,7 +16,7 @@
 ## Typescrpit
 
 -   [x] Refreshing the word when New game/Refresh btn is pressed
--   [ ] Letters to be greyed out and no longer reusable once clicked
+-   [x] Letters to be greyed out and no longer reusable once clicked
 -   [x] Reset the letter press when New game/refresh btn is pressed
 -   [x] Revealing matching letters
 -   [x] Hangman animation
