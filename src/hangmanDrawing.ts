@@ -4,19 +4,31 @@ const hangmanDrawingContainer =
 if (!hangmanDrawingContainer) {
     throw new Error("Can't find hangman drawing container");
 }
-export const hangmanDrawing = (incorrectLetterCount: number) => {
-    const hangmanParts = [
-        ".hangman-drawing__head",
-        ".hangman-drawing__body",
-        ".hangman-drawing__left-arm",
-        ".hangman-drawing__right-arm",
-        ".hangman-drawing__left-leg",
-        ".hangman-drawing__right-leg",
-    ];
+
+const hangmanParts = [
+    ".hangman-drawing__head",
+    ".hangman-drawing__body",
+    ".hangman-drawing__left-arm",
+    ".hangman-drawing__right-arm",
+    ".hangman-drawing__left-leg",
+    ".hangman-drawing__right-leg",
+];
+
+// adds hangman parts with unmatched letters
+export const hangmanDrawing = (incorrectCount: number) => {
     hangmanParts.forEach((selected, index) => {
         const part = document.querySelector<HTMLDivElement>(selected);
         if (part) {
-            part.classList.toggle("visible", index < incorrectLetterCount);
+            part.classList.toggle("visible", index < incorrectCount);
+        }
+    });
+};
+
+export const resetHangmanDrawing = () => {
+    hangmanParts.forEach((selected) => {
+        const part = document.querySelector<HTMLDivElement>(selected);
+        if (part?.classList.contains("visible")) {
+            part.classList.remove("visible");
         }
     });
 };

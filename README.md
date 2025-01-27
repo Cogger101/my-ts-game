@@ -19,7 +19,7 @@
 -   [ ] Letters to be greyed out and no longer reusable once clicked
 -   [x] Reset the letter press when New game/refresh btn is pressed
 -   [x] Revealing matching letters
--   [ ] Hangman animation
+-   [x] Hangman animation
     -   [x] Head pops up for first wrong letter
     -   [x] Body pops up for second wrong letter
     -   [x] 1st arm pops up for third wrong letter

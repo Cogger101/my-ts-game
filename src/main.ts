@@ -1,5 +1,5 @@
 import "./styles/style.scss";
-import { hangmanDrawing } from "./hangmanDrawing";
+import { hangmanDrawing, resetHangmanDrawing } from "./hangmanDrawing";
 import { alphabet, options, Options } from "./data";
 
 const keyboardContainer = document.querySelector<HTMLDivElement>(".keyboard");
@@ -33,6 +33,8 @@ const keyboard = () => {
         keyboardLetterBtn.addEventListener("click", () => {
             console.log(`${letter} button was clicked on the keyboard`);
             handleLetterClicks(letter);
+            keyboardLetterBtn.disabled = true;
+            keyboardLetterBtn.classList.add("keyboard__letter--disabled");
         });
         keyboardContainer.appendChild(keyboardLetterBtn);
     });
@@ -42,11 +44,11 @@ keyboard();
 
 // creating catagory selection and selecting a random word from data object
 let targetWord = "";
-let selectedCatagory = "";
+let selectedCatagory: string = "";
 const catagoriesArr = ["animals", "cities", "countries"];
 const categorySelection = () => {
     catagoriesArr.forEach((catagory) => {
-        let catagoriesBtn = document.createElement("button");
+        const catagoriesBtn = document.createElement("button");
         catagoriesBtn.textContent = catagory;
         catagoriesBtn.classList.add("options-container__catagory-btn");
 
@@ -84,7 +86,7 @@ const maxWrongGuesses = 6;
 const guessedLetters: string[] = [];
 //Counter for incorect letters guessed
 
-const incorrectLetters: string[] = [];
+let incorrectLetters: string[] = [];
 
 const incorrectLetterCount = (): number => {
     return incorrectLetters.length;
@@ -121,7 +123,7 @@ const handleLetterClicks = (key: string) => {
             // handling incorrect guesses
             incorrectLetters.push(key);
             console.log(`${key} is not in the word.`);
-            const incorrectCount = incorrectLetterCount();
+            let incorrectCount = incorrectLetterCount();
             hangmanDrawing(incorrectCount);
             console.log(incorrectLetters, "<=== incorect letters");
 
@@ -158,13 +160,39 @@ if (!newGameBtn) {
     throw new Error("Can't find new game btn element");
 }
 newGameBtn.addEventListener("click", () => {
+    incorrectLetters = [];
+    resetHangmanDrawing();
+    const keyboardBtns =
+        keyboardContainer.querySelectorAll<HTMLButtonElement>(
+            ".keyboard__letter"
+        );
+    keyboardBtns.forEach((btn) => {
+        btn.disabled = false;
+        btn.classList.remove("keyboard__letter--disabled");
+    });
     guessedLetters.length = 0;
+    targetWord = "";
+    selectedCatagory = "";
     const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
         ".word-display__letter"
     );
-    wordDisplay.forEach((li) => (li.textContent = "_"));
+    wordDisplay.forEach((li) => (li.textContent = ""));
     console.log("New game started");
+    wrongGuessMsg.textContent = "";
 });
+
+// Reveal the solution when a player gives up
+// const solutionBtn = document.querySelector<HTMLButtonElement>(
+//     ".in-game-btn__solution"
+// );
+
+// if (!solutionBtn) {
+//     throw new Error("Can't find solution Btn");
+// }
+
+// solutionBtn.addEventListener("click", () => {
+//     const revealSolution = document.createElement("h1");
+// });
 
 // Add event listener for physical keyboard inputs
 
