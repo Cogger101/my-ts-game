@@ -20,23 +20,23 @@
 -   [x] Reset the letter press when New game/refresh btn is pressed
 -   [x] Revealing matching letters
 -   [ ] Hangman animation
-    -   [ ] Head pops up for first wrong letter
-    -   [ ] Body pops up for second wrong letter
-    -   [ ] 1st arm pops up for third wrong letter
-    -   [ ] 2nd arm pops up for fourth wrong letter
-    -   [ ] 1st leg pops up for fifth wrong letter
-    -   [ ] 2nd leg pops up for sixth wrong letter
--   [ ] Have the hanging noose displayed
+    -   [x] Head pops up for first wrong letter
+    -   [x] Body pops up for second wrong letter
+    -   [x] 1st arm pops up for third wrong letter
+    -   [x] 2nd arm pops up for fourth wrong letter
+    -   [x] 1st leg pops up for fifth wrong letter
+    -   [x] 2nd leg pops up for sixth wrong letter
+-   [x] Have the hanging noose displayed
 -   [ ] Pop-up message when you lose
 -   [ ] Pop-up message when you win
--   [ ] Dictionary of words that are randomly selected
+-   [x] Dictionary of words that are randomly selected
 
 ## Bonus
 
 -   [ ] Adding more animation to the hangman ie falls off rope when you lose
 -   [ ] Timer
 -   [ ] Difficulty levels
--   [ ] Split words into catagories
+-   [x] Split words into catagories
 
 ## Project Overview
 

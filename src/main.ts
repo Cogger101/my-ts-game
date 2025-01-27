@@ -7,12 +7,19 @@ const wordDisplayContainer =
     document.querySelector<HTMLUListElement>(".word-display");
 const optionsContainer =
     document.querySelector<HTMLDivElement>(".options-container");
-// const wrongGuessMsg =
-//     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
+const wrongGuessMsg =
+    document.querySelector<HTMLDivElement>(".wrong-guess-msg");
+const gameOverContainer = document.querySelector<HTMLDivElement>(".win-lose");
 
-if (!keyboardContainer || !wordDisplayContainer || !optionsContainer) {
+if (
+    !keyboardContainer ||
+    !wordDisplayContainer ||
+    !optionsContainer ||
+    !wrongGuessMsg ||
+    !gameOverContainer
+) {
     throw new Error(
-        "Can't find div for keyboard/options container or UL for word display container"
+        "Can't find div for keyboard/options/wrongGuessMsg/gameOver container or UL for word display container"
     );
 }
 
@@ -31,6 +38,7 @@ const keyboard = () => {
     });
 };
 keyboard();
+// options[selectedCatagory] type
 
 // creating catagory selection and selecting a random word from data object
 let targetWord = "";
@@ -54,7 +62,7 @@ const categorySelection = () => {
                     options[selectedCatagory][randomIndex].toUpperCase();
                 console.log(targetWord, "targetWord");
                 const wordArr = targetWord.split("");
-                // Create word display placeholders
+                // Create word display placeholders ('_')
                 wordDisplayContainer.innerHTML = "";
                 console.log(wordArr);
                 wordArr.forEach(() => {
@@ -93,11 +101,22 @@ const handleLetterClicks = (key: string) => {
             ".word-display__letter"
         );
         if (targetWord.includes(key)) {
+            let correctGuesses: number = 0;
             targetWord.split("").forEach((letter, index) => {
                 if (letter === key) {
                     wordDisplay[index].textContent = key;
+                    correctGuesses++;
                 }
             });
+            // NOT WORKING
+            // if (correctGuesses === targetWord.length) {
+            //     gameOverContainer.innerHTML = "";
+            //     // You WIN message
+            //     const gameOverWin = document.createElement("h2");
+            //     gameOverWin.textContent = `You Win Congrats!!`;
+            //     gameOverWin.className = "win-lose__win";
+            //     gameOverContainer.appendChild(gameOverWin);
+            // }
         } else {
             // handling incorrect guesses
             incorrectLetters.push(key);
@@ -106,8 +125,25 @@ const handleLetterClicks = (key: string) => {
             hangmanDrawing(incorrectCount);
             console.log(incorrectLetters, "<=== incorect letters");
 
-            if (incorrectLetters.length > maxWrongGuesses) {
+            // handling wrong letter guesses msg
+            wrongGuessMsg.textContent = "";
+            const wrongLetter = document.createElement("p");
+            wrongLetter.textContent = `${key} is not in the word.`;
+            wrongLetter.className = "wrong-guess-msg__wrong-letter";
+            wrongGuessMsg.appendChild(wrongLetter);
+
+            // Game over You LOSE message
+            gameOverContainer.innerHTML = "";
+            if (incorrectLetters.length >= maxWrongGuesses) {
+                const gameOverLoss = document.createElement("h2");
+                gameOverLoss.textContent = `You Lose Game Over`;
+                gameOverLoss.className = "game-over__lose";
+                const gameOverLossMsg = document.createElement("p");
+                gameOverLossMsg.textContent = `The word was ${targetWord}`;
+                gameOverLossMsg.className = "game-over__lose-msg";
                 console.log("Game Over");
+                gameOverLoss.appendChild(gameOverLossMsg);
+                gameOverContainer.appendChild(gameOverLoss);
             }
         }
     }
