@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/my-ts-game/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hangman Game</title>
+      <script type="module" crossorigin src="/my-ts-game/assets/index-BaTPrSej.js"></script>
+      <link rel="stylesheet" crossorigin href="/my-ts-game/assets/index-NP7x-H9k.css">
+    </head>
+    <body>
+        <header>
+            <h1 class="heading">Hangman Game</h1>
+        </header>
+        <main>
+            <div class="start-btn"></div>
+                    <button class="start-btn__start-game">Start Game</button>
+                </div>
+            <div class="options-container"></div>
+            <div class="game-container">
+                
+                <div class="hangman-drawing">
+                    <div class="hangman-drawing hangman-drawing__head"></div>
+                    <div class="hangman-drawing hangman-drawing__body"></div>
+                    <div class="hangman-drawing hangman-drawing__left-arm"></div>
+                    <div class="hangman-drawing hangman-drawing__right-arm"></div>
+                    <div class="hangman-drawing hangman-drawing__left-leg"></div>
+                    <div class="hangman-drawing hangman-drawing__right-leg"></div>
+
+                    <div class="hangman-drawing__dropdown-noose"></div>
+                    <div class="hangman-drawing__top-bar"></div>
+                    <div class="hangman-drawing__standing-pole"></div>
+                    <div class="hangman-drawing__base-bar"></div>
+                </div>
+                <ul class="word-display"></ul>
+
+                <div class="keyboard"></div>
+                <div class="wrong-guess-counter"></div>
+                <div class="wrong-guess-msg"></div>
+                <div class="in-game-btn">
+                    <button class="in-game-btn__new-game">New Game</button>
+                    <button class="in-game-btn__solution">Solution</button>
+                </div>
+            </div>
+            
+            <div id="modal" class="game-over"></div>
+        </main>
+        <footer></footer>
+    </body>
+</html>
