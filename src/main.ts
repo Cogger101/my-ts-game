@@ -143,6 +143,12 @@ const resetGame = () => {
     wordDisplay.forEach((li) => (li.textContent = ""));
     console.log("New game started");
     wrongGuessMsg.textContent = "";
+    // Removing revealed solution if its been displayed
+
+    const revealSolution = document.querySelector(
+        ".in-game-btn__solution--reveal"
+    );
+    if (revealSolution) revealSolution.remove();
 };
 
 // Matching the keyboard and word display inputs
@@ -215,7 +221,7 @@ solutionBtn.addEventListener("click", () => {
         console.log("Solution already revealed");
     }
 });
-// Reset the game
+// New game - Reset the game
 
 const newGameBtn = document.querySelector<HTMLButtonElement>(
     ".in-game-btn__new-game"
