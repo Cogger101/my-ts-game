@@ -1,6 +1,6 @@
 import "./styles/style.scss";
 import { hangmanDrawing, resetHangmanDrawing } from "./hangmanDrawing";
-import { alphabet, options, Options } from "./data";
+import { alphabet, options } from "./data";
 
 const keyboardContainer = document.querySelector<HTMLDivElement>(".keyboard");
 const wordDisplayContainer =

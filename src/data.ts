@@ -28,9 +28,7 @@ export const alphabet = [
 ];
 
 export type Options = {
-    animals: string[];
-    cities: string[];
-    countries: string[];
+    [key: string]: string[];
 };
 
 export const options: Options = {
