@@ -1,10 +1,15 @@
 # TS HangMan Game Projecy Breakdown
 
-## Project Overview
+## 🕹️ Game Project Overview
 
 This is a hangman game built using **Typescript**, **HTML** and **SCSS** hosted on **GitHub Pages**. I really enjoyed this project as it helped me gain a better understanding of **Typescrpt** syntax and usage.
 
-## MVP
+## ✨ Highlights
+
+-   **Categories**: Category buttons to randomly generate a word based on that category
+-   **Retro Styling**: This was one of the first web games i played when growing up and wanted to replicate a retro look
+
+## 🚀 MVP
 
 ## HTML / SCSS
 
@@ -33,7 +38,7 @@ This is a hangman game built using **Typescript**, **HTML** and **SCSS** hosted 
 -   [x] Pop-up message when you win
 -   [x] Dictionary of words that are randomly selected
 
-## Bonus
+## 🎯 Bonus Additional features
 
 -   [ ] Adding more animation to the hangman ie falls off rope when you lose
 -   [ ] Timer

@@ -29,11 +29,15 @@ header {
     position: absolute;
     top: 0%;
 }
+.heading {
+    font-size: 50px;
+    margin-top: 50px;
+}
 .game-container {
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+    border: 2px solid white;
     gap: 2rem;
     padding: 30px;
     margin: 0 auto;

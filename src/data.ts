@@ -51,4 +51,15 @@ export const options: Options = {
         "INDIA",
         "RUSSIA",
     ],
+    pokemon: [
+        "PIKACHU",
+        "EKANS",
+        "WEEDLE",
+        "BULBASAUR",
+        "CHARMANDER",
+        "SQUIRTLE",
+        "NIDORAN",
+        "ODDISH",
+        "GROWLITHE",
+    ],
 };

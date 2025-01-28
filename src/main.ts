@@ -46,7 +46,7 @@ keyboard();
 // creating catagory selection and selecting a random word from array in data object
 let targetWord = "";
 let selectedCatagory: string = "";
-const catagoriesArr = ["animals", "cities", "countries"];
+const catagoriesArr = ["animals", "cities", "countries", "pokemon"];
 const categorySelection = () => {
     catagoriesArr.forEach((catagory) => {
         const catagoriesBtn = document.createElement("button");
