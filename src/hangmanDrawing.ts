@@ -23,7 +23,7 @@ export const hangmanDrawing = (incorrectCount: number) => {
         }
     });
 };
-
+// function to add to new game button to allow hangman to refresh
 export const resetHangmanDrawing = () => {
     hangmanParts.forEach((selected) => {
         const part = document.querySelector<HTMLDivElement>(selected);

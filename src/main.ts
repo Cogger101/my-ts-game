@@ -9,14 +9,16 @@ const optionsContainer =
     document.querySelector<HTMLDivElement>(".options-container");
 const wrongGuessMsg =
     document.querySelector<HTMLDivElement>(".wrong-guess-msg");
-const gameOverContainer = document.querySelector<HTMLDivElement>(".win-lose");
+const gameOverModal = document.querySelector<HTMLDivElement>(".game-over");
+const gameContainer = document.querySelector<HTMLDivElement>(".game-container");
 
 if (
     !keyboardContainer ||
     !wordDisplayContainer ||
     !optionsContainer ||
     !wrongGuessMsg ||
-    !gameOverContainer
+    !gameOverModal ||
+    !gameContainer
 ) {
     throw new Error(
         "Can't find div for keyboard/options/wrongGuessMsg/gameOver container or UL for word display container"
@@ -42,7 +44,7 @@ const keyboard = () => {
 keyboard();
 // options[selectedCatagory] type
 
-// creating catagory selection and selecting a random word from data object
+// creating catagory selection and selecting a random word from array in data object
 let targetWord = "";
 let selectedCatagory: string = "";
 const catagoriesArr = ["animals", "cities", "countries"];
@@ -51,7 +53,7 @@ const categorySelection = () => {
         const catagoriesBtn = document.createElement("button");
         catagoriesBtn.textContent = catagory;
         catagoriesBtn.classList.add("options-container__catagory-btn");
-
+        // Select a random word depending on the category selected
         catagoriesBtn.addEventListener("click", () => {
             console.log(`${catagory} was clicked`);
             selectedCatagory = catagoriesBtn.innerHTML ?? "";
@@ -92,6 +94,58 @@ const incorrectLetterCount = (): number => {
     return incorrectLetters.length;
 };
 
+// game over modal function
+
+const showGameOverModal = (message: string) => {
+    const modal = document.querySelector<HTMLDivElement>("#modal");
+    // creating the modal and the display message
+    if (modal) {
+        modal.innerHTML = `
+    <div class='gove-over-content'>
+    <h2>${message}<h2>
+    ${
+        message === "You Lose! Game Over!!"
+            ? `<p>The word was <strong> ${targetWord}</strong></p>`
+            : "<p>Congratulations! You Win!!</p>"
+    }
+    <button id="play-again-btn" class="game-over__play-again">Play Again</button>
+    </div>
+    `;
+        // show game over modal
+        modal.classList.add("show");
+        const playAgainBtn = modal.querySelector("#play-again-btn");
+        playAgainBtn?.addEventListener("click", resetGame);
+    }
+};
+
+// adding the reset game function to allow you to restart the game from the modal
+const resetGame = () => {
+    const modal = document.querySelector("#modal");
+    if (modal) {
+        modal?.classList.remove("show");
+        modal.innerHTML = "";
+    }
+    incorrectLetters = [];
+    resetHangmanDrawing();
+    const keyboardBtns =
+        keyboardContainer.querySelectorAll<HTMLButtonElement>(
+            ".keyboard__letter"
+        );
+    keyboardBtns.forEach((btn) => {
+        btn.disabled = false;
+        btn.classList.remove("keyboard__letter--disabled");
+    });
+    guessedLetters.length = 0;
+    targetWord = "";
+    selectedCatagory = "";
+    const wordDisplay = wordDisplayContainer.querySelectorAll<HTMLLIElement>(
+        ".word-display__letter"
+    );
+    wordDisplay.forEach((li) => (li.textContent = ""));
+    console.log("New game started");
+    wrongGuessMsg.textContent = "";
+};
+
 // Matching the keyboard and word display inputs
 
 const handleLetterClicks = (key: string) => {
@@ -103,29 +157,24 @@ const handleLetterClicks = (key: string) => {
             ".word-display__letter"
         );
         if (targetWord.includes(key)) {
-            let correctGuesses: number = 0;
             targetWord.split("").forEach((letter, index) => {
                 if (letter === key) {
                     wordDisplay[index].textContent = key;
-                    correctGuesses++;
                 }
             });
-            // NOT WORKING
-            // if (correctGuesses === targetWord.length) {
-            //     gameOverContainer.innerHTML = "";
-            //     // You WIN message
-            //     const gameOverWin = document.createElement("h2");
-            //     gameOverWin.textContent = `You Win Congrats!!`;
-            //     gameOverWin.className = "win-lose__win";
-            //     gameOverContainer.appendChild(gameOverWin);
-            // }
+            // checking for a win - all letters match
+            const isWin = Array.from(wordDisplay).every(
+                (li) => li.textContent !== "_"
+            );
+            if (isWin) {
+                showGameOverModal("Well Done");
+            }
         } else {
             // handling incorrect guesses
             incorrectLetters.push(key);
-            console.log(`${key} is not in the word.`);
+
             let incorrectCount = incorrectLetterCount();
             hangmanDrawing(incorrectCount);
-            console.log(incorrectLetters, "<=== incorect letters");
 
             // handling wrong letter guesses msg
             wrongGuessMsg.textContent = "";
@@ -134,23 +183,39 @@ const handleLetterClicks = (key: string) => {
             wrongLetter.className = "wrong-guess-msg__wrong-letter";
             wrongGuessMsg.appendChild(wrongLetter);
 
-            // Game over You LOSE message
-            gameOverContainer.innerHTML = "";
+            // Game over You LOSE
             if (incorrectLetters.length >= maxWrongGuesses) {
-                const gameOverLoss = document.createElement("h2");
-                gameOverLoss.textContent = `You Lose Game Over`;
-                gameOverLoss.className = "game-over__lose";
-                const gameOverLossMsg = document.createElement("p");
-                gameOverLossMsg.textContent = `The word was ${targetWord}`;
-                gameOverLossMsg.className = "game-over__lose-msg";
-                console.log("Game Over");
-                gameOverLoss.appendChild(gameOverLossMsg);
-                gameOverContainer.appendChild(gameOverLoss);
+                showGameOverModal("You Lose! Game Over!!");
             }
         }
     }
 };
 
+// Reveal the solution when a player gives up
+const solutionBtn = document.querySelector<HTMLButtonElement>(
+    ".in-game-btn__solution"
+);
+
+if (!solutionBtn) {
+    throw new Error("Can't find solution Btn");
+}
+
+solutionBtn.addEventListener("click", () => {
+    const existingSolution = document.querySelector(
+        ".in-game-btn__solution--reveal"
+    );
+    if (!existingSolution) {
+        const revealSolution = document.createElement("h1");
+        revealSolution.textContent = `The word was ${targetWord}`;
+        revealSolution.className = "in-game-btn__solution--reveal";
+        console.log(revealSolution);
+
+        const gameContainer = document.querySelector(".game-container");
+        gameContainer?.appendChild(revealSolution);
+    } else {
+        console.log("Solution already revealed");
+    }
+});
 // Reset the game
 
 const newGameBtn = document.querySelector<HTMLButtonElement>(
@@ -178,21 +243,18 @@ newGameBtn.addEventListener("click", () => {
     );
     wordDisplay.forEach((li) => (li.textContent = ""));
     console.log("New game started");
+
+    // resetting wrong letter guess msg
+
     wrongGuessMsg.textContent = "";
+
+    // Removing revealed solution if its been displayed
+
+    const revealSolution = document.querySelector(
+        ".in-game-btn__solution--reveal"
+    );
+    if (revealSolution) revealSolution.remove();
 });
-
-// Reveal the solution when a player gives up
-// const solutionBtn = document.querySelector<HTMLButtonElement>(
-//     ".in-game-btn__solution"
-// );
-
-// if (!solutionBtn) {
-//     throw new Error("Can't find solution Btn");
-// }
-
-// solutionBtn.addEventListener("click", () => {
-//     const revealSolution = document.createElement("h1");
-// });
 
 // Add event listener for physical keyboard inputs
 
