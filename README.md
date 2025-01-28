@@ -1,5 +1,9 @@
 # TS HangMan Game Projecy Breakdown
 
+## Project Overview
+
+This is a hangman game built using **Typescript**, **HTML** and **SCSS** hosted on **GitHub Pages**. I really enjoyed this project as it helped me gain a better understanding of **Typescrpt** syntax and usage.
+
 ## MVP
 
 ## HTML / SCSS
@@ -8,10 +12,8 @@
 -   [x] Space the letter buttons out (potentially replicate what a standard keyboard looks like or in alphabetical order)
 -   [x] Placeholder lines for new word
 -   [x] Create a display so the letters appear when you guess them correctly
--   [ ] Display for incorrect guesses
 -   [x] New game/ Restart button
 -   [x] 'Solution' button
--
 
 ## Typescrpit
 
@@ -27,8 +29,8 @@
     -   [x] 1st leg pops up for fifth wrong letter
     -   [x] 2nd leg pops up for sixth wrong letter
 -   [x] Have the hanging noose displayed
--   [ ] Pop-up message when you lose
--   [ ] Pop-up message when you win
+-   [x] Pop-up message when you lose
+-   [x] Pop-up message when you win
 -   [x] Dictionary of words that are randomly selected
 
 ## Bonus
@@ -36,8 +38,5 @@
 -   [ ] Adding more animation to the hangman ie falls off rope when you lose
 -   [ ] Timer
 -   [ ] Difficulty levels
--   [x] Split words into catagories
-
-## Project Overview
-
-This is a hangman game built using **Typescript**, **HTML** and **SCSS** hosted on **GitHub Pages**. I really enjoyed this project as it helped me gain a better understanding of **Typescrpt** syntax and usage.
+-   [x] Split words into multiple catagories
+-   [ ] Display for incorrect guesses

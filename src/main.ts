@@ -42,7 +42,6 @@ const keyboard = () => {
     });
 };
 keyboard();
-// options[selectedCatagory] type
 
 // creating catagory selection and selecting a random word from array in data object
 let targetWord = "";
